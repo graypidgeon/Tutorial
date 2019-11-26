@@ -1,0 +1,10 @@
+INSERT INTO house (id, name, description) VALUES (1, 'Pierwszaczek', 'Niby ladny ale jednak');
+INSERT INTO house (id, name, description) VALUES (2, 'Dwujniak', 'O chollllera');
+INSERT INTO house (id, name, description) VALUES (3, 'Ostry', 'Wiadomo jak jest');
+INSERT INTO house (id, name, description) VALUES (4, 'Dziaslak', 'Osz kurka flaqo');
+INSERT INTO house (id, name, description) VALUES (5, 'Wigwam', 'Będzie szła tam i tu a potem jeszcze w lewo');
+INSERT INTO house (id, name, description) VALUES (6, 'Warna', 'Lalo');
+INSERT INTO house (id, name, description) VALUES (7, 'Sarna', 'Kako');
+INSERT INTO house (id, name, description) VALUES (8, 'Laszlo', 'Waska');
+INSERT INTO house (id, name, description) VALUES (9, 'Benek', 'Lelum polelum');
+INSERT INTO house (id, name, description) VALUES (10, 'Wienio', 'Supcio');

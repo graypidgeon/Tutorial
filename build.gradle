@@ -23,6 +23,9 @@ dependencies {
 
 	compile 'com.h2database:h2'
 
+    //ctrl + f9 to reload
+    compile 'org.springframework.boot:spring-boot-devtools'
+
 	testCompile 'org.springframework.boot:spring-boot-starter-test'
 }
 
