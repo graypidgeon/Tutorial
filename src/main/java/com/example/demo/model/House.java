@@ -15,4 +15,5 @@ public class House {
     private long id;
     private String name;
     private String description;
+    private String url;
 }
