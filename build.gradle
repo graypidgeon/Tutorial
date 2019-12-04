@@ -26,6 +26,8 @@ dependencies {
     //ctrl + f9 to reload
     compile 'org.springframework.boot:spring-boot-devtools'
 
+    compile 'nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect:2.4.1'
+
 	testCompile 'org.springframework.boot:spring-boot-starter-test'
 }
 
