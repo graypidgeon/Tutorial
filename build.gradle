@@ -18,10 +18,13 @@ dependencies {
 	compile 'org.springframework.boot:spring-boot-starter-web'
 	compile 'org.springframework.boot:spring-boot-starter-thymeleaf'
 	compile 'org.springframework.boot:spring-boot-starter-data-jpa'
+	compile 'org.springframework.boot:spring-boot-starter-security'
 
 	compile 'org.projectlombok:lombok:1.18.10'
 
 	compile 'com.h2database:h2'
+
+	compile 'org.thymeleaf.extras:thymeleaf-extras-springsecurity5'
 
     //ctrl + f9 to reload
     compile 'org.springframework.boot:spring-boot-devtools'

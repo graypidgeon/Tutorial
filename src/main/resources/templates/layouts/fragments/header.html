@@ -31,6 +31,7 @@
                         <li><a href="#" class="text-white">Follow on Twitter</a></li>
                         <li><a href="#" class="text-white">Like on Facebook</a></li>
                         <li><a href="#" class="text-white">Email me</a></li>
+                        <li th:if="${#authorization.expression('isFullyAuthenticated()')}"><a th:href="@{/logout}" class="text-white">Sign Out</a></li>
                     </ul>
                 </div>
             </div>
