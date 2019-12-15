@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+import com.example.demo.model.SearchCriteria;
 import com.example.demo.model.User;
 import com.example.demo.repository.HouseRepository;
 import com.example.demo.repository.UserRepository;
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.validation.Valid;
@@ -21,9 +23,15 @@ public class StartController {
     @Autowired
     private HouseRepository houseRepository;
 
-    @GetMapping("/")
+    @GetMapping(value = {"/", "/loginAction"})
     public String homePage(Model model) {
         model.addAttribute("houses", houseRepository.findAll());
+        return "home";
+    }
+
+    @PostMapping("/search")
+    public String search(@ModelAttribute SearchCriteria sc) {
+        System.out.println("args " + sc.getName() + ", " + sc.getDescription());
         return "home";
     }
 

@@ -14,6 +14,7 @@ INSERT INTO authority (id, name) VALUES (2, 'ROLE_USER');
 
 INSERT INTO user (id, username, password) VALUES (1,'ironman','tajne');
 INSERT INTO user (id, username, password) VALUES (2,'hulk','poufne');
+ALTER SEQUENCE HIBERNATE_SEQUENCE RESTART WITH 3;
 
 INSERT INTO user_authority (authority_id, user_id) VALUES (1, 1);
 INSERT INTO user_authority (authority_id, user_id) VALUES (2, 2);
