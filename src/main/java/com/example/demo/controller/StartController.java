@@ -1,10 +1,13 @@
 package com.example.demo.controller;
 
-import com.example.demo.model.SearchCriteria;
+import com.example.demo.model.HouseSearchCriteria;
 import com.example.demo.model.User;
 import com.example.demo.repository.HouseRepository;
+import com.example.demo.repository.HouseSpecs;
 import com.example.demo.repository.UserRepository;
+import com.example.demo.service.HouseService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -21,17 +24,17 @@ public class StartController {
     private UserRepository userRepository;
 
     @Autowired
-    private HouseRepository houseRepository;
+    private HouseService houseService;
 
     @GetMapping(value = {"/", "/loginAction"})
     public String homePage(Model model) {
-        model.addAttribute("houses", houseRepository.findAll());
+        model.addAttribute("houses", houseService.findAll());
         return "home";
     }
 
     @PostMapping("/search")
-    public String search(@ModelAttribute SearchCriteria sc) {
-        System.out.println("args " + sc.getName() + ", " + sc.getDescription());
+    public String search(Model model, @ModelAttribute HouseSearchCriteria sc) {
+        model.addAttribute("houses", houseService.findBySearchCriteria(sc));
         return "home";
     }
 

@@ -1,6 +1,6 @@
 package com.example.demo.controller;
 
-import com.example.demo.model.SearchCriteria;
+import com.example.demo.model.HouseSearchCriteria;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 public class GlobalControllerAdvice {
 
     @ModelAttribute("searchCriteria")
-    public SearchCriteria populateUser() {
-        return new SearchCriteria();
+    public HouseSearchCriteria populateUser() {
+        return new HouseSearchCriteria();
     }
 }
