@@ -13,6 +13,14 @@ repositories {
 	mavenCentral()
 }
 
+if (!System.hasProperty("spring.profiles.active")) {
+	file("src/main/resources/application.properties").withReader {
+		Properties props = new Properties()
+		props.load(it)
+		project.ext.springApplicationProps = props
+	}
+}
+
 dependencies {
 	compile 'org.springframework.boot:spring-boot-starter'
 	compile 'org.springframework.boot:spring-boot-starter-web'
@@ -36,4 +44,19 @@ dependencies {
 
 test {
 	useJUnitPlatform()
+}
+
+processResources {
+	doLast {
+		if ((!System.hasProperty("spring.profiles.active") &&
+				project.ext.springApplicationProps["spring.profiles.active"]) ||
+			System.getProperty("spring.profiles.active") == "dev") {
+			println "Preparing development image database"
+			copy {
+				from '.'
+				into 'build/resources/main'
+				include 'dev/**'
+			}
+		}
+	}
 }

@@ -15,5 +15,10 @@ public class House {
     private long id;
     private String name;
     private String description;
-    private String url;
+    private String imagePath;
+
+    public void updateFromForm(House house) {
+        this.setName(house.getName());
+        this.setDescription(house.getDescription());
+    }
 }

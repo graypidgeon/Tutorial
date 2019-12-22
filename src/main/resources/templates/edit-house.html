@@ -9,13 +9,24 @@
         <h2 class="mb-5">Update house</h2>
         <div class="row">
             <div class="col-md-6">
-                <form action="#" th:action="test" th:object="${house}" method="post">
-                    <input type="hidden" th:field="*{id}" class="form-control" id="id">
+                <form action="#" th:action="@{/house/edit/{houseId}(houseId=${house.id})}" th:object="${house}" method="post">
                     <div class="row">
                         <div class="form-group col-md-6">
                             <label for="name" class="col-form-label">Name</label>
                             <input type="text" th:field="*{name}" class="form-control" id="name" placeholder="Name">
                             <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-md-6">
+                            <label for="name" class="col-form-label">Description</label>
+                            <input type="text" th:field="*{description}" class="form-control" id="description" placeholder="Description">
+                            <span th:if="${#fields.hasErrors('description')}" th:errors="*{name}" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-md-6">
+                            <img class="card-img-top" th:src="@{/getImage/{imageId}(imageId=*{id})}" data-holder-rendered="true">
                         </div>
                     </div>
                     <div class="row">

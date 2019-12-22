@@ -22,10 +22,22 @@ public class HouseServiceImpl implements HouseService {
     }
 
     @Override
+    public House findById(Long id) {
+        return houseRepository.findById(id).get();
+    }
+
+    @Override
     public List<House> findBySearchCriteria(HouseSearchCriteria hsc) {
         Specification spec1 = HouseSpecs.nameLike(hsc.getName());
         Specification spec2 = HouseSpecs.descriptionLike(hsc.getDescription());
 
         return houseRepository.findAll(Specification.where(spec1).and(spec2));
+    }
+
+    @Override
+    public void editHouse(House house) {
+        House h = houseRepository.findById(house.getId()).get();
+        h.updateFromForm(house);
+        houseRepository.save(h);
     }
 }
