@@ -1,6 +1,7 @@
 package com.example.demo.controller;
 
 import com.example.demo.service.HouseService;
+import com.example.demo.service.ImageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.env.Environment;
@@ -24,27 +25,17 @@ public class ImageController {
 
     @Autowired
     private HouseService houseService;
-    @Value("${images.path}")
-    private String imagesPath;
     @Autowired
-    Environment env;
+    private ImageService imageService;
 
     @RequestMapping(value = "/getImage/{id}", method = RequestMethod.GET,
             produces = MediaType.IMAGE_JPEG_VALUE)
     public ResponseEntity<InputStreamResource> getImage(@PathVariable("id") Long id) throws IOException {
-        var imgFile = getResource(imagesPath + "/" + houseService.findById(id).getImagePath());
+        var imgFile = imageService.getResource(houseService.findById(id).getImagePath());
 
         return ResponseEntity
                 .ok()
                 .contentType(MediaType.IMAGE_JPEG)
                 .body(new InputStreamResource(imgFile.getInputStream()));
-    }
-
-    private Resource getResource(String path) throws MalformedURLException {
-        if (Arrays.asList(env.getActiveProfiles()).contains("prod")) {
-            return new FileUrlResource(path);
-        } else {
-            return new ClassPathResource(path);
-        }
     }
 }

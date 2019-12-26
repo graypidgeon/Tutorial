@@ -6,12 +6,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
+import java.io.IOException;
 
 @Controller
 @RequestMapping("/house")
@@ -28,10 +27,10 @@ public class HouseController {
 
     @PostMapping("/edit/{id}")
     public String editHouse(Model model, @PathVariable("id") Long id,
-                            @Valid House house, BindingResult result) {
-        house.setId(id);
+            @Valid House house, @RequestParam MultipartFile imageFile, BindingResult result)
+            throws IOException {
         if (!result.hasErrors()) {
-            houseService.editHouse(house);
+            houseService.saveHouse(id, house, imageFile);
         }
 
         return editHouse(model, id);

@@ -33,8 +33,10 @@ dependencies {
 	compile 'com.h2database:h2'
 
 	compile 'org.thymeleaf.extras:thymeleaf-extras-springsecurity5'
+	compile 'org.apache.commons:commons-lang3:3.9'
 
-    //ctrl + f9 to reload
+
+	//ctrl + f9 to reload
     compile 'org.springframework.boot:spring-boot-devtools'
 
     compile 'nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect:2.4.1'
@@ -46,15 +48,21 @@ test {
 	useJUnitPlatform()
 }
 
+clean {
+	delete LOCAL_IMAGE_DATABASE_LOCATION
+}
+
 processResources {
 	doLast {
 		if ((!System.hasProperty("spring.profiles.active") &&
 				project.ext.springApplicationProps["spring.profiles.active"]) ||
 			System.getProperty("spring.profiles.active") == "dev") {
-			println "Preparing development image database"
+			println "Preparing development image database under " + LOCAL_IMAGE_DATABASE_LOCATION
+			delete LOCAL_IMAGE_DATABASE_LOCATION
+			mkdir LOCAL_IMAGE_DATABASE_LOCATION
 			copy {
 				from '.'
-				into 'build/resources/main'
+				into LOCAL_IMAGE_DATABASE_LOCATION
 				include 'dev/**'
 			}
 		}

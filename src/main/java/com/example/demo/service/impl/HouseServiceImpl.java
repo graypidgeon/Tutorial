@@ -5,16 +5,23 @@ import com.example.demo.model.HouseSearchCriteria;
 import com.example.demo.repository.HouseRepository;
 import com.example.demo.repository.HouseSpecs;
 import com.example.demo.service.HouseService;
+import com.example.demo.service.ImageService;
+import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 
 @Service
 public class HouseServiceImpl implements HouseService {
     @Autowired
     private HouseRepository houseRepository;
+    @Autowired
+    private ImageService imageService;
 
     @Override
     public List<House> findAll() {
@@ -35,9 +42,19 @@ public class HouseServiceImpl implements HouseService {
     }
 
     @Override
-    public void editHouse(House house) {
-        House h = houseRepository.findById(house.getId()).get();
-        h.updateFromForm(house);
-        houseRepository.save(h);
+    @Transactional
+    public void saveHouse(Long id, House stateFromForm, MultipartFile imageFile) throws IOException {
+        House databaseState = findById(id);
+
+        String oldImagePath = databaseState.getImagePath();
+        if (!imageFile.isEmpty()) {
+            String fileExtension = ImageService.getFileExtension(imageFile.getOriginalFilename());
+            databaseState.setImagePath(RandomStringUtils.randomAlphabetic(15)
+                    + "." + fileExtension);
+        }
+        databaseState.updateFromForm(stateFromForm);
+        houseRepository.save(databaseState);
+
+        imageService.replaceImage(oldImagePath, imageFile, databaseState.getImagePath());
     }
 }
