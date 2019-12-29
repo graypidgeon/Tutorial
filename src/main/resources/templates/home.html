@@ -25,9 +25,9 @@
                                 <p class="card-text" th:text="${house.name}">Name</p>
                                 <p class="card-text" th:text="${house.description}">Description</p>
                                 <div class="d-flex justify-content-between align-items-center">
-                                    <div class="btn-group">
-                                        <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                                        <button type="button" class="btn btn-sm btn-outline-secondary" th:onclick="|location.href='house/edit/${house.id}'|" th:if="${#authorization.expression('hasRole(''ADMIN'')')}">Edit</button>
+                                    <div class="btn-group" th:if="${#authorization.expression('hasRole(''ADMIN'')')}">
+                                        <button type="button" class="btn btn-sm btn-outline-secondary" th:onclick="|location.href='house/edit/${house.id}'|">Edit</button>
+                                        <button type="button" class="btn btn-sm btn-outline-secondary" th:onclick="|location.href='house/delete/${house.id}'|">Delete</button>
                                     </div>
                                     <small class="text-muted">9 mins</small>
                                 </div>

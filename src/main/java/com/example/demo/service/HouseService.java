@@ -2,6 +2,7 @@ package com.example.demo.service;
 
 import com.example.demo.model.House;
 import com.example.demo.model.HouseSearchCriteria;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
@@ -14,4 +15,5 @@ public interface HouseService {
 
     void saveHouse(Long id, House stateFromForm, MultipartFile imageFile) throws IOException;
     House addNewHouse(House stateFromForm, MultipartFile imageFile) throws IOException;
+    void deleteHouse(Long id) throws IOException;
 }

@@ -55,6 +55,15 @@ public class HouseServiceImpl implements HouseService {
         return saveHouse(stateFromForm, stateFromForm, imageFile, null);
     }
 
+    @Override
+    @Transactional
+    public void deleteHouse(Long id) throws IOException {
+        imageService.getResource(
+            houseRepository.findById(id).get().getImagePath()
+        ).getFile().delete();
+        houseRepository.deleteById(id);
+    }
+
     private House saveHouse(House databaseState, House stateFromForm, MultipartFile imageFile, String oldImagePath) throws IOException {
         if (!imageFile.isEmpty()) {
             String fileExtension = ImageService.getFileExtension(imageFile.getOriginalFilename());

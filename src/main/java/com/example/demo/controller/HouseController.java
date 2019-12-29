@@ -32,6 +32,12 @@ public class HouseController {
         return "edit-house";
     }
 
+    @GetMapping("/delete/{id}")
+    public String addHouse(Model m, @PathVariable Long id) throws IOException {
+        houseService.deleteHouse(id);
+        return "redirect:/";
+    }
+
     @GetMapping("/edit/{id}")
     public String editHouse(Model m, @PathVariable Long id) {
         m.addAttribute("house", houseService.findById(id));
