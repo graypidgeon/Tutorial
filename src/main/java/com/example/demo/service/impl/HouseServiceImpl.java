@@ -46,15 +46,26 @@ public class HouseServiceImpl implements HouseService {
     public void saveHouse(Long id, House stateFromForm, MultipartFile imageFile) throws IOException {
         House databaseState = findById(id);
 
-        String oldImagePath = databaseState.getImagePath();
+        saveHouse(databaseState, stateFromForm, imageFile, databaseState.getImagePath());
+    }
+
+    @Override
+    @Transactional
+    public House addNewHouse(House stateFromForm, MultipartFile imageFile) throws IOException {
+        return saveHouse(stateFromForm, stateFromForm, imageFile, null);
+    }
+
+    private House saveHouse(House databaseState, House stateFromForm, MultipartFile imageFile, String oldImagePath) throws IOException {
         if (!imageFile.isEmpty()) {
             String fileExtension = ImageService.getFileExtension(imageFile.getOriginalFilename());
             databaseState.setImagePath(RandomStringUtils.randomAlphabetic(15)
                     + "." + fileExtension);
         }
         databaseState.updateFromForm(stateFromForm);
-        houseRepository.save(databaseState);
+        House returnObject = houseRepository.save(databaseState);
 
         imageService.replaceImage(oldImagePath, imageFile, databaseState.getImagePath());
+
+        return returnObject;
     }
 }

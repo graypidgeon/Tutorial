@@ -13,4 +13,5 @@ public interface HouseService {
     List<House> findBySearchCriteria(HouseSearchCriteria hsc);
 
     void saveHouse(Long id, House stateFromForm, MultipartFile imageFile) throws IOException;
+    House addNewHouse(House stateFromForm, MultipartFile imageFile) throws IOException;
 }

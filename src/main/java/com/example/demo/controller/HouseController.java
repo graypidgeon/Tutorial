@@ -19,6 +19,19 @@ public class HouseController {
     @Autowired
     private HouseService houseService;
 
+    @GetMapping("/add")
+    public String addHouse(Model m) {
+        m.addAttribute("house", new House());
+        return "add-house";
+    }
+
+    @PostMapping("/add")
+    public String addHouse(Model model, @Valid House house, @RequestParam MultipartFile imageFile,
+            BindingResult result) throws IOException {
+        model.addAttribute("house", houseService.addNewHouse(house, imageFile));
+        return "edit-house";
+    }
+
     @GetMapping("/edit/{id}")
     public String editHouse(Model m, @PathVariable Long id) {
         m.addAttribute("house", houseService.findById(id));

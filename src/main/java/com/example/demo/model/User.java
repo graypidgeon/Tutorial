@@ -12,7 +12,8 @@ import java.util.Set;
 public class User {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "id_generator")
+    @SequenceGenerator(name="id_generator", sequenceName = "user_seq", allocationSize=1)
     private int id;
 
     @NotBlank(message = "Name is mandatory")

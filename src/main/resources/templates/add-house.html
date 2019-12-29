@@ -4,8 +4,8 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorator="layouts/default">
 <body>
-    <div id="page" layout:fragment="content" th:with="formUrl=@{/house/edit/{houseId}(houseId=${house.id})}">
-        <div th:replace="layouts/edit-house :: editForm(title='Update house')"></div>
+    <div id="page" layout:fragment="content">
+        <div th:replace="layouts/edit-house :: editForm(title='Add house',formUrl='/house/add')"></div>
     </div>
 </body>
 </html>
