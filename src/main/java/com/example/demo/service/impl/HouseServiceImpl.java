@@ -8,6 +8,7 @@ import com.example.demo.service.HouseService;
 import com.example.demo.service.ImageService;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -25,7 +26,8 @@ public class HouseServiceImpl implements HouseService {
 
     @Override
     public List<House> findAll() {
-        return houseRepository.findAll();
+        Sort.Order order = new Sort.Order(Sort.Direction.ASC, "name").ignoreCase();
+        return houseRepository.findAll(Sort.by(order));
     }
 
     @Override
