@@ -1,6 +1,7 @@
 package com.example.demo.service.impl;
 
 import com.example.demo.model.House;
+import com.example.demo.model.HouseOrderBy;
 import com.example.demo.model.HouseSearchCriteria;
 import com.example.demo.repository.HouseRepository;
 import com.example.demo.repository.HouseSpecs;
@@ -25,8 +26,8 @@ public class HouseServiceImpl implements HouseService {
     private ImageService imageService;
 
     @Override
-    public List<House> findAll() {
-        Sort.Order order = new Sort.Order(Sort.Direction.ASC, "name").ignoreCase();
+    public List<House> findAll(HouseOrderBy orderBy) {
+        Sort.Order order = new Sort.Order(Sort.Direction.ASC, orderBy.getPropertyName()).ignoreCase();
         return houseRepository.findAll(Sort.by(order));
     }
 
@@ -37,10 +38,11 @@ public class HouseServiceImpl implements HouseService {
 
     @Override
     public List<House> findBySearchCriteria(HouseSearchCriteria hsc) {
+        Sort.Order order = new Sort.Order(Sort.Direction.ASC, hsc.getOrderBy().getPropertyName()).ignoreCase();
         Specification spec1 = HouseSpecs.nameLike(hsc.getName());
         Specification spec2 = HouseSpecs.descriptionLike(hsc.getDescription());
 
-        return houseRepository.findAll(Specification.where(spec1).and(spec2));
+        return houseRepository.findAll(Specification.where(spec1).and(spec2), Sort.by(order));
     }
 
     @Override

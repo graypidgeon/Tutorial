@@ -1,13 +1,11 @@
 package com.example.demo.controller;
 
+import com.example.demo.model.HouseOrderBy;
 import com.example.demo.model.HouseSearchCriteria;
 import com.example.demo.model.User;
-import com.example.demo.repository.HouseRepository;
-import com.example.demo.repository.HouseSpecs;
 import com.example.demo.repository.UserRepository;
 import com.example.demo.service.HouseService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -28,13 +26,15 @@ public class StartController {
 
     @GetMapping(value = {"/", "/loginAction"})
     public String homePage(Model model) {
-        model.addAttribute("houses", houseService.findAll());
+        HouseOrderBy orderBy = HouseOrderBy.NAME;
+        model.addAttribute("houses", houseService.findAll(orderBy));
         return "home";
     }
 
     @PostMapping("/search")
     public String search(Model model, @ModelAttribute HouseSearchCriteria sc) {
         model.addAttribute("houses", houseService.findBySearchCriteria(sc));
+        model.addAttribute("searchCriteria", sc);
         return "home";
     }
 

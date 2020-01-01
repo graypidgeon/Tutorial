@@ -1,6 +1,7 @@
 package com.example.demo.service;
 
 import com.example.demo.model.House;
+import com.example.demo.model.HouseOrderBy;
 import com.example.demo.model.HouseSearchCriteria;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
@@ -9,7 +10,7 @@ import java.io.IOException;
 import java.util.List;
 
 public interface HouseService {
-    List<House> findAll();
+    List<House> findAll(HouseOrderBy orderBy);
     House findById(Long id);
     List<House> findBySearchCriteria(HouseSearchCriteria hsc);
 

@@ -48,7 +48,8 @@
             <div class="col-sm-8 col-md-9 py-4">
                 <div class="container">
                     <div class="input-group">
-                        <form action="#" th:action="@{/search}" th:object="${searchCriteria}" method="post" >
+                        <form action="#" th:action="@{/search}" th:object="${searchCriteria}" method="post" name="searchForm">
+                            <input type="hidden" th:field="*{orderBy}">
                             <div class="form-row align-items-center">
                                 <div class="col-auto">
                                     <input type="text" th:field="*{name}"  class="form-control" placeholder="Search by name">
