@@ -19,6 +19,13 @@
                     </div>
                     <div class="row">
                         <div class="form-group col-md-6">
+                            <label for="name" class="col-form-label">Area</label>
+                            <input type="text" th:field="*{area}" class="form-control" id="area" placeholder="Area">
+                            <span th:if="${#fields.hasErrors('area')}" th:errors="*{area}" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-md-6">
                             <label for="imageFile" class="col-form-label">Image</label>
                             <img class="card-img-top" th:src="@{/getImage/{imageId}(imageId=*{id})}" data-holder-rendered="true" th:if="*{imagePath}!=null">
                             <div class="custom-file">

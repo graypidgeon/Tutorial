@@ -1,7 +1,7 @@
 package com.example.demo.model;
 
 public enum HouseOrderBy {
-    DESCRIPTION("Description"), NAME("Name");
+    DESCRIPTION("Description"), NAME("Name"), AREA("Area");
 
     private final String value;
     HouseOrderBy(String value) {

@@ -14,9 +14,11 @@ public class House {
     private String name;
     private String description;
     private String imagePath;
+    private int area;
 
     public void updateFromForm(House house) {
         this.setName(house.getName());
         this.setDescription(house.getDescription());
+        this.setArea(house.getArea());
     }
 }
