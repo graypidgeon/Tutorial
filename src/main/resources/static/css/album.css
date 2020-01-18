@@ -30,3 +30,7 @@ footer p {
 .sidebar-panel .col-auto {
   margin-bottom: 10px;
 }
+
+.sidebar-panel .form-control:not(:first-child) {
+  margin-top: 10px;
+}

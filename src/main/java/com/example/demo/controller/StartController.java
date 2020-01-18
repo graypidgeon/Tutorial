@@ -32,6 +32,7 @@ public class StartController {
     }
 
     @PostMapping("/search")
+    //validation of sc
     public String search(Model model, @ModelAttribute HouseSearchCriteria sc) {
         model.addAttribute("houses", houseService.findBySearchCriteria(sc));
         model.addAttribute("searchCriteria", sc);

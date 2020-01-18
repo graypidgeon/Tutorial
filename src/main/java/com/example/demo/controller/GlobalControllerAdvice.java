@@ -10,6 +10,6 @@ public class GlobalControllerAdvice {
 
     @ModelAttribute("searchCriteria")
     public HouseSearchCriteria populateUser() {
-        return new HouseSearchCriteria(null, null, HouseOrderBy.NAME);
+        return new HouseSearchCriteria(null, null, null, null, HouseOrderBy.NAME);
     }
 }

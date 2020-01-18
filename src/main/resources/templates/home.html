@@ -27,6 +27,15 @@
                             <input type="text" th:field="*{description}" class="form-control" placeholder="Search by description">
                         </div>
                         <div class="col-auto">
+                            <div class="card">
+                                <div class="card-header">Search by area [m<sup>2</sup>]:</div>
+                                <div class="card-body">
+                                    <input type="text" th:field="*{areaFrom}" class="form-control" placeholder="Area from">
+                                    <input type="text" th:field="*{areaTo}" class="form-control" placeholder="Area to">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-auto">
                             <div class="input-group-append">
                                 <button class="btn btn-secondary" type="submit">
                                     <i class="fa fa-search"></i>
@@ -74,7 +83,7 @@
                                             <button type="button" class="btn btn-sm btn-outline-secondary" th:onclick="|location.href='house/edit/${house.id}'|">Edit</button>
                                             <button type="button" class="btn btn-sm btn-outline-secondary" data-toggle="modal" data-target="#confirmDelete" th:data-delete-href="|house/delete/${house.id}|" data-delete-type="house">Delete</button>
                                         </div>
-                                        <small class="text-muted">Area: <span th:text="${house.area}"></span> m2</small>
+                                        <small class="text-muted">Area: <span th:text="${house.area}"></span> m<sup>2</sup></small>
                                     </div>
                                 </div>
                             </div>
