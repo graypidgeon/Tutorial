@@ -14,49 +14,74 @@
                 </p>
             </div>
         </section>
-        <div class="album bg-light">
-            <nav class="navbar navbar-expand-sm bg-light navbar-light">
-                <ul class="navbar-nav">
-                    <li class="nav-item">
-                        <div class="nav-link">Order by:</div>
-                    </li>
-                    <li th:each="orderBy : ${T(com.example.demo.model.HouseOrderBy).values()}" class="nav-item">
-                        <a class="nav-link" href="#"
-                           th:classappend="${orderBy == searchCriteria.orderBy} ? active : ''"
-                           th:data1="${orderBy}"
-                           th:onclick="onClickOrderByLink(this.getAttribute('data1'))"
-                           th:text="${orderBy.value}"></a>
-                    </li>
-                </ul>
-            </nav>
-            <script type="text/javascript">
-                function onClickOrderByLink(orderByValue) {
-                    var searchForm = document.forms["searchForm"];
-                    searchForm.elements["orderBy"].value=orderByValue;
-                    searchForm.submit();
-                }
-            </script>
-            <div class="container">
+        <div class="album bg-light row">
+            <div class="col-md-3 border-right sidebar-panel searchPanel">
+                <div class="sidebar-heading">Search Criteria</div>
+                <div class="list-group list-group-flush">
+                    <form action="#" th:action="@{/search}" th:object="${searchCriteria}" method="post" name="searchForm">
+                        <input type="hidden" th:field="*{orderBy}">
+                        <div class="col-auto">
+                            <input type="text" th:field="*{name}"  class="form-control" placeholder="Search by name">
+                        </div>
+                        <div class="col-auto">
+                            <input type="text" th:field="*{description}" class="form-control" placeholder="Search by description">
+                        </div>
+                        <div class="col-auto">
+                            <div class="input-group-append">
+                                <button class="btn btn-secondary" type="submit">
+                                    <i class="fa fa-search"></i>
+                                    Search
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+<!--                    <a href="#" class="list-group-item list-group-item-action bg-light">Status</a>-->
+                </div>
+            </div>
+            <div class="col-md-9">
+                <nav class="navbar navbar-expand-sm bg-light navbar-light">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <div class="nav-link">Order by:</div>
+                        </li>
+                        <li th:each="orderBy : ${T(com.example.demo.model.HouseOrderBy).values()}" class="nav-item">
+                            <a class="nav-link" href="#"
+                               th:classappend="${orderBy == searchCriteria.orderBy} ? active : ''"
+                               th:data1="${orderBy}"
+                               th:onclick="onClickOrderByLink(this.getAttribute('data1'))"
+                               th:text="${orderBy.value}"></a>
+                        </li>
+                    </ul>
+                </nav>
+                <script type="text/javascript">
+                    function onClickOrderByLink(orderByValue) {
+                        var searchForm = document.forms["searchForm"];
+                        searchForm.elements["orderBy"].value=orderByValue;
+                        searchForm.submit();
+                    }
+                </script>
+                <div class="container">
 
-                <div class="row">
-                    <div th:each="house : ${houses}" class="col-md-4">
-                        <div class="card mb-4 box-shadow">
-                            <img class="card-img-top" th:src="@{/getImage/{houseId}(houseId=${house.id})}" data-holder-rendered="true">
-                            <div class="card-body">
-                                <p class="card-text" th:text="${house.name}">Name</p>
-                                <p class="card-text" th:text="${house.description}">Description</p>
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <div class="btn-group" th:if="${#authorization.expression('hasRole(''ADMIN'')')}">
-                                        <button type="button" class="btn btn-sm btn-outline-secondary" th:onclick="|location.href='house/edit/${house.id}'|">Edit</button>
-                                        <button type="button" class="btn btn-sm btn-outline-secondary" data-toggle="modal" data-target="#confirmDelete" th:data-delete-href="|house/delete/${house.id}|" data-delete-type="house">Delete</button>
+                    <div class="row">
+                        <div th:each="house : ${houses}" class="col-md-4">
+                            <div class="card mb-4 box-shadow">
+                                <img class="card-img-top" th:src="@{/getImage/{houseId}(houseId=${house.id})}" data-holder-rendered="true">
+                                <div class="card-body">
+                                    <p class="card-text" th:text="${house.name}">Name</p>
+                                    <p class="card-text" th:text="${house.description}">Description</p>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div class="btn-group" th:if="${#authorization.expression('hasRole(''ADMIN'')')}">
+                                            <button type="button" class="btn btn-sm btn-outline-secondary" th:onclick="|location.href='house/edit/${house.id}'|">Edit</button>
+                                            <button type="button" class="btn btn-sm btn-outline-secondary" data-toggle="modal" data-target="#confirmDelete" th:data-delete-href="|house/delete/${house.id}|" data-delete-type="house">Delete</button>
+                                        </div>
+                                        <small class="text-muted">Area: <span th:text="${house.area}"></span> m2</small>
                                     </div>
-                                    <small class="text-muted">Area: <span th:text="${house.area}"></span> m2</small>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
 
+                </div>
             </div>
         </div>
 

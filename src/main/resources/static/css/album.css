@@ -1,0 +1,32 @@
+:root {
+  --jumbotron-padding-y: 3rem;
+}
+
+.jumbotron {
+  margin-bottom: 0;
+}
+
+footer {
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+}
+
+footer p {
+  margin-bottom: .25rem;
+}
+
+.box-shadow { box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05); }
+
+.sidebar-heading {
+  padding: 0.875rem 1.25rem;
+  ont-size: 1.2rem;
+}
+
+.sidebar-panel {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.sidebar-panel .col-auto {
+  margin-bottom: 10px;
+}
