@@ -28,10 +28,19 @@
                         </div>
                         <div class="col-auto">
                             <div class="card">
-                                <div class="card-header">Search by area [m<sup>2</sup>]:</div>
+                                <div class="card-header">Search by usage area [m<sup>2</sup>]:</div>
                                 <div class="card-body">
-                                    <input type="text" th:field="*{areaFrom}" class="form-control" placeholder="Area from">
-                                    <input type="text" th:field="*{areaTo}" class="form-control" placeholder="Area to">
+                                    <input type="text" th:field="*{usageAreaFrom}" class="form-control" placeholder="Usage area from">
+                                    <input type="text" th:field="*{usageAreaTo}" class="form-control" placeholder="Usage area to">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-auto">
+                            <div class="card">
+                                <div class="card-header">Minimal dimensions [m]:</div>
+                                <div class="card-body">
+                                    <input type="text" th:field="*{minWidth}" class="form-control" placeholder="Width" data-toggle="tooltip" title="Width is measured from entrance to possession">
+                                    <input type="text" th:field="*{minHeight}" class="form-control" placeholder="Height">
                                 </div>
                             </div>
                         </div>
@@ -83,7 +92,7 @@
                                             <button type="button" class="btn btn-sm btn-outline-secondary" th:onclick="|location.href='house/edit/${house.id}'|">Edit</button>
                                             <button type="button" class="btn btn-sm btn-outline-secondary" data-toggle="modal" data-target="#confirmDelete" th:data-delete-href="|house/delete/${house.id}|" data-delete-type="house">Delete</button>
                                         </div>
-                                        <small class="text-muted">Area: <span th:text="${house.area}"></span> m<sup>2</sup></small>
+                                        <small class="text-muted">Usage area: <span th:text="${house.usageArea}"></span> m<sup>2</sup></small>
                                     </div>
                                 </div>
                             </div>

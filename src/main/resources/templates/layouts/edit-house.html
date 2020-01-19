@@ -12,16 +12,30 @@
                     </div>
                     <div class="row">
                         <div class="form-group col-md-6">
-                            <label for="name" class="col-form-label">Description</label>
+                            <label for="description" class="col-form-label">Description</label>
                             <input type="text" th:field="*{description}" class="form-control" id="description" placeholder="Description">
                             <span th:if="${#fields.hasErrors('description')}" th:errors="*{name}" class="text-danger"></span>
                         </div>
                     </div>
                     <div class="row">
                         <div class="form-group col-md-6">
-                            <label for="name" class="col-form-label">Area</label>
-                            <input type="text" th:field="*{area}" class="form-control" id="area" placeholder="Area">
-                            <span th:if="${#fields.hasErrors('area')}" th:errors="*{area}" class="text-danger"></span>
+                            <label for="usageArea" class="col-form-label">Usage area</label>
+                            <input type="text" th:field="*{usageArea}" class="form-control" id="usageArea" placeholder="Usage area">
+                            <span th:if="${#fields.hasErrors('usageArea')}" th:errors="*{usageArea}" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-md-6">
+                            <label for="width" class="col-form-label">Width</label>
+                            <input type="text" th:field="*{width}" class="form-control" id="width" placeholder="Width">
+                            <span th:if="${#fields.hasErrors('width')}" th:errors="*{width}" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-md-6">
+                            <label for="height" class="col-form-label">Height</label>
+                            <input type="text" th:field="*{height}" class="form-control" id="height" placeholder="Height">
+                            <span th:if="${#fields.hasErrors('height')}" th:errors="*{height}" class="text-danger"></span>
                         </div>
                     </div>
                     <div class="row">

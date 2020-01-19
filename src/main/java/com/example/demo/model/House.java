@@ -14,11 +14,15 @@ public class House {
     private String name;
     private String description;
     private String imagePath;
-    private int area;
+    private int usageArea;
+    private int width;
+    private int height;
 
     public void updateFromForm(House house) {
         this.setName(house.getName());
         this.setDescription(house.getDescription());
-        this.setArea(house.getArea());
+        this.setUsageArea(house.getUsageArea());
+        this.setWidth(house.getWidth());
+        this.setHeight(house.getHeight());
     }
 }

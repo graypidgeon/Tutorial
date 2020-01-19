@@ -10,8 +10,10 @@ import lombok.Data;
 public class HouseSearchCriteria {
     private String name;
     private String description;
-    private Integer areaFrom;
-    private Integer areaTo;
+    private Integer usageAreaFrom;
+    private Integer usageAreaTo;
+    private Integer minWidth;
+    private Integer minHeight;
     @Builder.Default
     private HouseOrderBy orderBy = HouseOrderBy.NAME;
 }

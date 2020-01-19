@@ -25,14 +25,27 @@ public class HouseSpecs {
                                 "%" + description + "%");
     }
 
-    public static Specification<House> areaBetween(Integer areaFrom, Integer areaTo) {
+    public static Specification<House> usageAreaBetween(Integer areaFrom, Integer areaTo) {
         return (root, query, builder) -> {
             List<Predicate> predicateList = new ArrayList<>();
             if (areaFrom != null) {
-                predicateList.add(builder.ge(root.get("area"), areaFrom));
+                predicateList.add(builder.ge(root.get("usageArea"), areaFrom));
             }
             if (areaTo != null) {
-                predicateList.add(builder.le(root.get("area"), areaTo));
+                predicateList.add(builder.le(root.get("usageArea"), areaTo));
+            }
+            return builder.and(predicateList.stream().toArray(Predicate[]::new));
+        };
+    }
+
+    public static Specification<House> minWidthAndHeight(Integer minWidth, Integer minHeight) {
+        return (root, query, builder) -> {
+            List<Predicate> predicateList = new ArrayList<>();
+            if (minWidth != null) {
+                predicateList.add(builder.ge(root.get("width"), minWidth));
+            }
+            if (minHeight != null) {
+                predicateList.add(builder.ge(root.get("height"), minHeight));
             }
             return builder.and(predicateList.stream().toArray(Predicate[]::new));
         };
