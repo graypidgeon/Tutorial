@@ -39,13 +39,14 @@ public class HouseServiceImpl implements HouseService {
     @Override
     public List<House> findBySearchCriteria(HouseSearchCriteria hsc) {
         Sort.Order order = new Sort.Order(Sort.Direction.ASC, hsc.getOrderBy().getPropertyName()).ignoreCase();
-        Specification spec1 = HouseSpecs.nameLike(hsc.getName());
-        Specification spec2 = HouseSpecs.descriptionLike(hsc.getDescription());
-        Specification spec3 = HouseSpecs.usageAreaBetween(hsc.getUsageAreaFrom(), hsc.getUsageAreaTo());
-        Specification spec4 = HouseSpecs.minWidthAndHeight(hsc.getMinWidth(), hsc.getMinHeight());
 
         return houseRepository.findAll(
-                Specification.where(spec1).and(spec2).and(spec3).and(spec4),
+                Specification.where(HouseSpecs.nameLike(hsc.getName()))
+                    .and(HouseSpecs.descriptionLike(hsc.getDescription()))
+                    .and(HouseSpecs.usageAreaBetween(hsc.getUsageAreaFrom(), hsc.getUsageAreaTo()))
+                    .and(HouseSpecs.minWidthAndHeight(hsc.getMinWidth(), hsc.getMinHeight()))
+                    .and(HouseSpecs.buildingAreaBetween(hsc.getBuildingAreaFrom(), hsc.getBuildingAreaTo()))
+                    .and(HouseSpecs.storeyEquals(hsc.getStorey())),
                 Sort.by(order));
     }
 

@@ -37,10 +37,33 @@
                         </div>
                         <div class="col-auto">
                             <div class="card">
+                                <div class="card-header">Search by building area [m<sup>2</sup>]:</div>
+                                <div class="card-body">
+                                    <input type="text" th:field="*{buildingAreaFrom}" class="form-control" placeholder="Building area from">
+                                    <input type="text" th:field="*{buildingAreaTo}" class="form-control" placeholder="Building area to">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-auto">
+                            <div class="card">
                                 <div class="card-header">Minimal dimensions [m]:</div>
                                 <div class="card-body">
                                     <input type="text" th:field="*{minWidth}" class="form-control" placeholder="Width" data-toggle="tooltip" title="Width is measured from entrance to possession">
                                     <input type="text" th:field="*{minHeight}" class="form-control" placeholder="Height">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-auto">
+                            <div class="card">
+                                <div class="card-header">Storeys amount:</div>
+                                <div class="card-body">
+                                    <select class="form-control" th:field="*{storey}">
+                                        <option value="" ></option>
+                                        <option th:each="state : ${T(com.example.demo.model.Storey).values()}"
+                                                th:value="${state}"
+                                                th:text="${state.value}">
+                                        </option>
+                                    </select>
                                 </div>
                             </div>
                         </div>

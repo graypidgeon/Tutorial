@@ -14,6 +14,9 @@ public class HouseSearchCriteria {
     private Integer usageAreaTo;
     private Integer minWidth;
     private Integer minHeight;
+    private Integer buildingAreaFrom;
+    private Integer buildingAreaTo;
+    private Storey storey;
     @Builder.Default
     private HouseOrderBy orderBy = HouseOrderBy.NAME;
 }

@@ -26,6 +26,13 @@
                     </div>
                     <div class="row">
                         <div class="form-group col-md-6">
+                            <label for="buildingArea" class="col-form-label">Building area</label>
+                            <input type="text" th:field="*{buildingArea}" class="form-control" id="buildingArea" placeholder="Building area">
+                            <span th:if="${#fields.hasErrors('buildingArea')}" th:errors="*{buildingArea}" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-md-6">
                             <label for="width" class="col-form-label">Width</label>
                             <input type="text" th:field="*{width}" class="form-control" id="width" placeholder="Width">
                             <span th:if="${#fields.hasErrors('width')}" th:errors="*{width}" class="text-danger"></span>
@@ -36,6 +43,18 @@
                             <label for="height" class="col-form-label">Height</label>
                             <input type="text" th:field="*{height}" class="form-control" id="height" placeholder="Height">
                             <span th:if="${#fields.hasErrors('height')}" th:errors="*{height}" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-md-6">
+                            <label for="storey" class="col-form-label">Storey amount</label>
+                            <select class="form-control" th:field="*{storey}" id="storey">
+                                <option value="" ></option>
+                                <option th:each="state : ${T(com.example.demo.model.Storey).values()}"
+                                        th:value="${state}"
+                                        th:text="${state.value}">
+                                </option>
+                            </select>
                         </div>
                     </div>
                     <div class="row">

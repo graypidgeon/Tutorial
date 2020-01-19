@@ -1,6 +1,7 @@
 package com.example.demo.repository;
 
 import com.example.demo.model.House;
+import com.example.demo.model.Storey;
 import org.springframework.data.jpa.domain.Specification;
 
 import javax.persistence.criteria.Predicate;
@@ -49,5 +50,25 @@ public class HouseSpecs {
             }
             return builder.and(predicateList.stream().toArray(Predicate[]::new));
         };
+    }
+
+    public static Specification<House> buildingAreaBetween(Integer buildingAreaFrom, Integer buildingAreaTo) {
+        return (root, query, builder) -> {
+            List<Predicate> predicateList = new ArrayList<>();
+            if (buildingAreaFrom != null) {
+                predicateList.add(builder.ge(root.get("buildingArea"), buildingAreaFrom));
+            }
+            if (buildingAreaTo != null) {
+                predicateList.add(builder.le(root.get("buildingArea"), buildingAreaTo));
+            }
+            return builder.and(predicateList.stream().toArray(Predicate[]::new));
+        };
+    }
+
+    public static Specification<House> storeyEquals(Storey storey) {
+        return (root, query, builder) ->
+                storey == null ?
+                        builder.conjunction() :
+                        builder.equal(root.get("storey"), storey);
     }
 }
