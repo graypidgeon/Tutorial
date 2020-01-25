@@ -12,6 +12,6 @@ public class GlobalControllerAdvice {
     public HouseSearchCriteria populateUser() {
         return new HouseSearchCriteria(null, null, null,
             null,null, null , null,
-            null, null, HouseOrderBy.NAME);
+            null, null, null, HouseOrderBy.NAME);
     }
 }

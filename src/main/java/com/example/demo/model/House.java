@@ -20,6 +20,8 @@ public class House {
     private int height;
     @Enumerated(EnumType.STRING)
     private Storey storey;
+    @Enumerated(EnumType.STRING)
+    private Garage garage;
 
     public void updateFromForm(House house) {
         this.setName(house.getName());
@@ -29,5 +31,6 @@ public class House {
         this.setWidth(house.getWidth());
         this.setHeight(house.getHeight());
         this.setStorey(house.getStorey());
+        this.setGarage(house.getGarage());
     }
 }

@@ -59,6 +59,18 @@
                     </div>
                     <div class="row">
                         <div class="form-group col-md-6">
+                            <label for="garage" class="col-form-label">Garage</label>
+                            <select class="form-control" th:field="*{garage}" id="garage">
+                                <option value="" ></option>
+                                <option th:each="state : ${T(com.example.demo.model.Garage).values()}"
+                                        th:value="${state}"
+                                        th:text="${state.value}">
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-md-6">
                             <label for="imageFile" class="col-form-label">Image</label>
                             <img class="card-img-top" th:src="@{/getImage/{imageId}(imageId=*{id})}" data-holder-rendered="true" th:if="*{imagePath}!=null">
                             <div class="custom-file">

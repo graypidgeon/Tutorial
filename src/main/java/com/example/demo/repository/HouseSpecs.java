@@ -1,5 +1,6 @@
 package com.example.demo.repository;
 
+import com.example.demo.model.Garage;
 import com.example.demo.model.House;
 import com.example.demo.model.Storey;
 import org.springframework.data.jpa.domain.Specification;
@@ -70,5 +71,12 @@ public class HouseSpecs {
                 storey == null ?
                         builder.conjunction() :
                         builder.equal(root.get("storey"), storey);
+    }
+
+    public static Specification<House> garageEquals(Garage garage) {
+        return (root, query, builder) ->
+                garage == null ?
+                        builder.conjunction() :
+                        builder.equal(root.get("garage"), garage);
     }
 }

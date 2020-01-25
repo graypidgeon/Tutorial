@@ -46,7 +46,8 @@ public class HouseServiceImpl implements HouseService {
                     .and(HouseSpecs.usageAreaBetween(hsc.getUsageAreaFrom(), hsc.getUsageAreaTo()))
                     .and(HouseSpecs.minWidthAndHeight(hsc.getMinWidth(), hsc.getMinHeight()))
                     .and(HouseSpecs.buildingAreaBetween(hsc.getBuildingAreaFrom(), hsc.getBuildingAreaTo()))
-                    .and(HouseSpecs.storeyEquals(hsc.getStorey())),
+                    .and(HouseSpecs.storeyEquals(hsc.getStorey()))
+                    .and(HouseSpecs.garageEquals(hsc.getGarage())),
                 Sort.by(order));
     }
 

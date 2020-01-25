@@ -68,15 +68,32 @@
                             </div>
                         </div>
                         <div class="col-auto">
-                            <div class="input-group-append">
-                                <button class="btn btn-secondary" type="submit">
+                            <div class="card">
+                                <div class="card-header">Garage:</div>
+                                <div class="card-body">
+                                    <select class="form-control" th:field="*{garage}">
+                                        <option value="" ></option>
+                                        <option th:each="garage : ${T(com.example.demo.model.Garage).values()}"
+                                                th:value="${garage}"
+                                                th:text="${garage.value}">
+                                        </option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-auto">
+                            <div class="input-group-append btn-group">
+                                <button class="btn btn-primary" type="submit">
                                     <i class="fa fa-search"></i>
                                     Search
+                                </button>
+                                <button class="btn btn-secondary" onclick="onClickClearFilters()" type="button">
+                                    <i class="fa fa-trash"></i>
+                                    Clear filters
                                 </button>
                             </div>
                         </div>
                     </form>
-<!--                    <a href="#" class="list-group-item list-group-item-action bg-light">Status</a>-->
                 </div>
             </div>
             <div class="col-md-9">
@@ -99,6 +116,21 @@
                         var searchForm = document.forms["searchForm"];
                         searchForm.elements["orderBy"].value=orderByValue;
                         searchForm.submit();
+                    }
+                    function onClickClearFilters() {
+                        var searchForm = document.forms["searchForm"];
+                        var elements = searchForm.elements;
+
+                        for (i in elements) {
+                            switch(elements[i].type) {
+                                case "text":
+                                    elements[i].value = "";
+                                    break;
+                                case "select-one":
+                                    elements[i].selectedIndex = -1;
+                                    break;
+                            }
+                        }
                     }
                 </script>
                 <div class="container">

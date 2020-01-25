@@ -17,6 +17,7 @@ public class HouseSearchCriteria {
     private Integer buildingAreaFrom;
     private Integer buildingAreaTo;
     private Storey storey;
+    private Garage garage;
     @Builder.Default
     private HouseOrderBy orderBy = HouseOrderBy.NAME;
 }
