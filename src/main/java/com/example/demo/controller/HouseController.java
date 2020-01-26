@@ -19,6 +19,13 @@ public class HouseController {
     @Autowired
     private HouseService houseService;
 
+    @GetMapping("/get/{id}")
+    public String viewHouse(Model model, @PathVariable("id") Long id) {
+        model.addAttribute("house", houseService.findById(id));
+
+        return "view-house";
+    }
+
     @GetMapping("/add")
     public String addHouse(Model m) {
         m.addAttribute("house", new House());

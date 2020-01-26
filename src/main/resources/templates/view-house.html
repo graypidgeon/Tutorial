@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layouts/default">
+<body>
+<div id="page" layout:fragment="content">
+    <div class="container my-5">
+        <h2 class="mb-5" th:text="${house.name}">House name</h2>
+        <div class="row">
+            <div class="col-md-5">
+                <dl>
+                    <dt>Usage area:</dt>
+                    <dd><span th:text="${house.usageArea}"></span> m<sup>2</sup></dd>
+                    <dt>Boiler room area:</dt>
+                    <dd><span th:text="${house.boilerRoomArea}"></span> m<sup>2</sup></dd>
+                    <dt>Garage area:</dt>
+                    <dd><span th:text="${house.garageArea}"></span> m<sup>2</sup></dd>
+                    <dt>Building area:</dt>
+                    <dd><span th:text="${house.buildingArea}"></span> m<sup>2</sup></dd>
+                    <dt>Minimal dimensions:</dt>
+                    <dd><span th:text="${house.width}"></span> x <span th:text="${house.height}"></span> m</dd>
+                </dl>
+            </div>
+            <div class="col-md-7">
+                <img class="card-img-top" th:src="@{/getImage/{houseId}(houseId=${house.id})}" data-holder-rendered="true">
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
