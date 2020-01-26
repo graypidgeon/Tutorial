@@ -19,14 +19,6 @@ public class HouseSpecs {
                                 "%" + name.toLowerCase() + "%");
     }
 
-    public static Specification<House> descriptionLike(String description) {
-        return (root, query, builder) ->
-                description == null ?
-                        builder.conjunction() :
-                        builder.like(builder.lower(root.get("description")),
-                                "%" + description + "%");
-    }
-
     public static Specification<House> usageAreaBetween(Integer areaFrom, Integer areaTo) {
         return (root, query, builder) -> {
             List<Predicate> predicateList = new ArrayList<>();

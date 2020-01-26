@@ -42,7 +42,6 @@ public class HouseServiceImpl implements HouseService {
 
         return houseRepository.findAll(
                 Specification.where(HouseSpecs.nameLike(hsc.getName()))
-                    .and(HouseSpecs.descriptionLike(hsc.getDescription()))
                     .and(HouseSpecs.usageAreaBetween(hsc.getUsageAreaFrom(), hsc.getUsageAreaTo()))
                     .and(HouseSpecs.minWidthAndHeight(hsc.getMinWidth(), hsc.getMinHeight()))
                     .and(HouseSpecs.buildingAreaBetween(hsc.getBuildingAreaFrom(), hsc.getBuildingAreaTo()))

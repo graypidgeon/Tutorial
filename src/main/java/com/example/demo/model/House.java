@@ -16,6 +16,8 @@ public class House {
     private String imagePath;
     private int usageArea;
     private int buildingArea;
+    private int garageArea;
+    private int boilerRoomArea;
     private int width;
     private int height;
     @Enumerated(EnumType.STRING)
@@ -27,6 +29,8 @@ public class House {
         this.setName(house.getName());
         this.setDescription(house.getDescription());
         this.setUsageArea(house.getUsageArea());
+        this.setGarageArea(house.getGarageArea());
+        this.setBoilerRoomArea(house.getBoilerRoomArea());
         this.setBuildingArea(house.getBuildingArea());
         this.setWidth(house.getWidth());
         this.setHeight(house.getHeight());
