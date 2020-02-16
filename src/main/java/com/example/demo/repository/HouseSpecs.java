@@ -1,15 +1,25 @@
 package com.example.demo.repository;
 
-import com.example.demo.model.Garage;
-import com.example.demo.model.House;
-import com.example.demo.model.Storey;
+import com.example.demo.model.*;
 import org.springframework.data.jpa.domain.Specification;
 
+import javax.persistence.criteria.Fetch;
+import javax.persistence.criteria.Join;
+import javax.persistence.criteria.JoinType;
 import javax.persistence.criteria.Predicate;
 import java.util.ArrayList;
 import java.util.List;
 
 public class HouseSpecs {
+
+    public static Specification<House> fetchMainImage() {
+        return (root, query, builder) -> {
+            Fetch<House, Image> fetch = root.fetch("images", JoinType.LEFT);
+            Join<House, Image> join = (Join<House, Image>) fetch;
+            query.distinct(true);
+            return builder.equal(join.get("imageSection"), ImageSection.MAIN);
+        };
+    }
 
     public static Specification<House> nameLike(String name) {
         return (root, query, builder) ->

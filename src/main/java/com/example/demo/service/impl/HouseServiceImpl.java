@@ -1,8 +1,6 @@
 package com.example.demo.service.impl;
 
-import com.example.demo.model.House;
-import com.example.demo.model.HouseOrderBy;
-import com.example.demo.model.HouseSearchCriteria;
+import com.example.demo.model.*;
 import com.example.demo.repository.HouseRepository;
 import com.example.demo.repository.HouseSpecs;
 import com.example.demo.service.HouseService;
@@ -28,12 +26,14 @@ public class HouseServiceImpl implements HouseService {
     @Override
     public List<House> findAll(HouseOrderBy orderBy) {
         Sort.Order order = new Sort.Order(Sort.Direction.ASC, orderBy.getPropertyName()).ignoreCase();
-        return houseRepository.findAll(Sort.by(order));
+        return houseRepository.findAll(
+                Specification.where(HouseSpecs.fetchMainImage()),
+                Sort.by(order));
     }
 
     @Override
     public House findById(Long id) {
-        return houseRepository.findById(id).get();
+        return houseRepository.findOneWithImagesById(id);
     }
 
     @Override
@@ -46,7 +46,8 @@ public class HouseServiceImpl implements HouseService {
                     .and(HouseSpecs.minWidthAndHeight(hsc.getMinWidth(), hsc.getMinHeight()))
                     .and(HouseSpecs.buildingAreaBetween(hsc.getBuildingAreaFrom(), hsc.getBuildingAreaTo()))
                     .and(HouseSpecs.storeyEquals(hsc.getStorey()))
-                    .and(HouseSpecs.garageEquals(hsc.getGarage())),
+                    .and(HouseSpecs.garageEquals(hsc.getGarage()))
+                    .and(HouseSpecs.fetchMainImage()),
                 Sort.by(order));
     }
 
@@ -55,7 +56,7 @@ public class HouseServiceImpl implements HouseService {
     public void saveHouse(Long id, House stateFromForm, MultipartFile imageFile) throws IOException {
         House databaseState = findById(id);
 
-        saveHouse(databaseState, stateFromForm, imageFile, databaseState.getImagePath());
+        saveHouse(databaseState, stateFromForm, imageFile, databaseState.getMainImage());
     }
 
     @Override
@@ -65,24 +66,28 @@ public class HouseServiceImpl implements HouseService {
     }
 
     @Override
-    @Transactional
     public void deleteHouse(Long id) throws IOException {
         imageService.getResource(
-            houseRepository.findById(id).get().getImagePath()
+            houseRepository.findOneWithImagesById(id).getMainImage()
         ).getFile().delete();
         houseRepository.deleteById(id);
     }
 
-    private House saveHouse(House databaseState, House stateFromForm, MultipartFile imageFile, String oldImagePath) throws IOException {
+    private House saveHouse(House databaseState, House stateFromForm, MultipartFile imageFile, Image oldImage) throws IOException {
         if (!imageFile.isEmpty()) {
             String fileExtension = ImageService.getFileExtension(imageFile.getOriginalFilename());
-            databaseState.setImagePath(RandomStringUtils.randomAlphabetic(15)
+            if (databaseState.getMainImage() == null) {
+                databaseState.getImages().add(new Image()
+                        .withImageSection(ImageSection.MAIN));
+            }
+            databaseState.getMainImage().setImagePath(RandomStringUtils.randomAlphabetic(15)
                     + "." + fileExtension);
         }
         databaseState.updateFromForm(stateFromForm);
         House returnObject = houseRepository.save(databaseState);
 
-        imageService.replaceImage(oldImagePath, imageFile, databaseState.getImagePath());
+        imageService.replaceImage(oldImage, imageFile, databaseState.getMainImage().getImagePath());
+        //TODO delete old image
 
         return returnObject;
     }

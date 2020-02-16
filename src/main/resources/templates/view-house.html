@@ -23,9 +23,19 @@
                 </dl>
             </div>
             <div class="col-md-7">
-                <img class="card-img-top" th:src="@{/getImage/{houseId}(houseId=${house.id})}" data-holder-rendered="true">
+                <img class="card-img-top" th:src="@{/getImage/{imageId}(imageId=${house.mainImage.id})}" data-holder-rendered="true">
             </div>
         </div>
+        <!-- TODO display in proper way
+        <div class="row">
+            <div class="col-md-12">
+                <ul>
+                    <li th:each="galleryImage : ${house.getImagesBySection(T(com.example.demo.model.ImageSection).GALLERY)}">
+                        <img class="card-img-top" th:src="@{/getImage/{imageId}(imageId=${galleryImage.id})}" data-holder-rendered="true">
+                    </li>
+                </ul>
+            </div>
+        </div>-->
     </div>
 </div>
 </body>

@@ -31,7 +31,7 @@ public class ImageController {
     @RequestMapping(value = "/getImage/{id}", method = RequestMethod.GET,
             produces = MediaType.IMAGE_JPEG_VALUE)
     public ResponseEntity<InputStreamResource> getImage(@PathVariable("id") Long id) throws IOException {
-        var imgFile = imageService.getResource(houseService.findById(id).getImagePath());
+        var imgFile = imageService.getResource(imageService.findById(id));
 
         return ResponseEntity
                 .ok()

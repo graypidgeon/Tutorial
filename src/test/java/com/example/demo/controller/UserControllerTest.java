@@ -35,10 +35,10 @@ public class UserControllerTest {
     @Before
     public void init() {
         User returnUser = new User();
-        returnUser.setId(1l);
+        returnUser.setId(1);
         returnUser.setEmail("asd");
-        returnUser.setName("www");
-        given(userRepository.findById(1l)).willReturn(Optional.of(returnUser));
+        returnUser.setUsername("www");
+        given(userRepository.findById(1)).willReturn(Optional.of(returnUser));
 
         List<User> users = new ArrayList<User>();
         users.add(returnUser);

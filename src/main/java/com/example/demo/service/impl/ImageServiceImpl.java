@@ -1,6 +1,10 @@
 package com.example.demo.service.impl;
 
+import com.example.demo.model.Image;
+import com.example.demo.repository.HouseRepository;
+import com.example.demo.repository.ImageRepository;
 import com.example.demo.service.ImageService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.FileUrlResource;
 import org.springframework.core.io.Resource;
@@ -17,21 +21,31 @@ public class ImageServiceImpl implements ImageService {
     @Value("${images.path}")
     private String imagesPath;
 
+    @Autowired
+    private ImageRepository imageRepository;
+
     public String getImagePath() {
         return imagesPath;
     }
 
     @Override
-    public Resource getResource(String path) throws MalformedURLException {
-        String resourcePath = getImagePath() + path;
+    public Resource getResource(Image image) throws MalformedURLException {
+        String resourcePath = getImagePath() + image.getImagePath();
         return new FileUrlResource(resourcePath);
     }
 
     @Override
-    public void replaceImage(String oldImage, MultipartFile newImage, String newImageName) throws IOException {
+    public void replaceImage(Image oldImage, MultipartFile newImage, String newImageName) throws IOException {
         if (!newImage.isEmpty()) {
-            getResource(oldImage).getFile().delete();
+            if (oldImage != null) {
+                getResource(oldImage).getFile().delete();
+            }
             newImage.transferTo(new File(getImagePath() + newImageName).getAbsoluteFile());
         }
+    }
+
+    @Override
+    public Image findById(Long id) {
+        return imageRepository.findById(id).get();
     }
 }
