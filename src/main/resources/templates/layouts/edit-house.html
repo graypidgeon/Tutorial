@@ -72,7 +72,7 @@
                     <div class="row">
                         <div class="form-group col-md-6">
                             <label for="imageFile" class="col-form-label">Image</label>
-                            <img class="card-img-top" th:src="@{/getImage/{imageId}(imageId=*{id})}" data-holder-rendered="true" th:if="*{mainImage?.imagePath}!=null">
+                            <img class="card-img-top" th:src="@{/getImage/{imagePath}(imagePath=*{mainImage.imagePath})}" data-holder-rendered="true" th:if="*{mainImage?.imagePath}!=null">
                             <div class="custom-file">
                                 <input type="file" class="custom-file-input" id="imageFile" name="imageFile" lang="pl">
                                 <label class="custom-file-label" for="imageFile" data-browse="Browse!">Choose image</label>

@@ -8,7 +8,7 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 
 public interface ImageService {
-    Resource getResource(Image image) throws MalformedURLException;
+    Resource getResource(String imagePath) throws MalformedURLException;
     void replaceImage(Image oldImage, MultipartFile newImage, String newImageName) throws IOException;
     Image findById(Long id);
 

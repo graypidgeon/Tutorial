@@ -28,10 +28,10 @@ public class ImageController {
     @Autowired
     private ImageService imageService;
 
-    @RequestMapping(value = "/getImage/{id}", method = RequestMethod.GET,
+    @RequestMapping(value = "/getImage/{imagePath}", method = RequestMethod.GET,
             produces = MediaType.IMAGE_JPEG_VALUE)
-    public ResponseEntity<InputStreamResource> getImage(@PathVariable("id") Long id) throws IOException {
-        var imgFile = imageService.getResource(imageService.findById(id));
+    public ResponseEntity<InputStreamResource> getImage(@PathVariable("imagePath") String imagePath) throws IOException {
+        var imgFile = imageService.getResource(imagePath);
 
         return ResponseEntity
                 .ok()

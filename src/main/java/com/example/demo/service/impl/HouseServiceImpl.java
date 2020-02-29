@@ -68,7 +68,7 @@ public class HouseServiceImpl implements HouseService {
     @Override
     public void deleteHouse(Long id) throws IOException {
         imageService.getResource(
-            houseRepository.findOneWithImagesById(id).getMainImage()
+            houseRepository.findOneWithImagesById(id).getMainImage().getImagePath()
         ).getFile().delete();
         houseRepository.deleteById(id);
     }

@@ -136,7 +136,7 @@
                         <div th:each="house : ${houses}" class="col-md-4">
                             <div class="card mb-4 box-shadow">
                                 <a th:href="@{/house/get/{id}(id=${house.id})}">
-                                    <img class="card-img-top" th:src="@{/getImage/{imageId}(imageId=${house.mainImage.id})}" data-holder-rendered="true">
+                                    <img class="card-img-top" th:src="@{/getImage/{imagePath}(imagePath=${house.mainImage.imagePath})}" data-holder-rendered="true">
                                 </a>
                                 <div class="card-body">
                                     <p class="card-text" th:text="${house.name}" style="margin-bottom: 0px">Name</p>

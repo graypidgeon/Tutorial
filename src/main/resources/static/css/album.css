@@ -34,3 +34,13 @@ footer p {
 .sidebar-panel .form-control:not(:first-child) {
   margin-top: 10px;
 }
+
+.gallery {
+  overflow-x: auto;
+  width: 100%;
+  margin-left: 0px;
+}
+
+.gallery .col-md-3 {
+  padding-left: 0px;
+}

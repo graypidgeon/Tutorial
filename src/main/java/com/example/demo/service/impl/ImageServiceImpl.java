@@ -29,8 +29,8 @@ public class ImageServiceImpl implements ImageService {
     }
 
     @Override
-    public Resource getResource(Image image) throws MalformedURLException {
-        String resourcePath = getImagePath() + image.getImagePath();
+    public Resource getResource(String imagePath) throws MalformedURLException {
+        String resourcePath = getImagePath() + imagePath;
         return new FileUrlResource(resourcePath);
     }
 
@@ -38,7 +38,7 @@ public class ImageServiceImpl implements ImageService {
     public void replaceImage(Image oldImage, MultipartFile newImage, String newImageName) throws IOException {
         if (!newImage.isEmpty()) {
             if (oldImage != null) {
-                getResource(oldImage).getFile().delete();
+                getResource(oldImage.getImagePath()).getFile().delete();
             }
             newImage.transferTo(new File(getImagePath() + newImageName).getAbsoluteFile());
         }

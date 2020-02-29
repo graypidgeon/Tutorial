@@ -20,7 +20,9 @@ INSERT INTO image (id, image_path, image_section, house_id) VALUES (7, '7.jpg', 
 INSERT INTO image (id, image_path, image_section, house_id) VALUES (8, '8.jpg', 'MAIN', 8);
 INSERT INTO image (id, image_path, image_section, house_id) VALUES (9, '9.jpg', 'MAIN', 9);
 INSERT INTO image (id, image_path, image_section, house_id) VALUES (10, '10.jpg', 'MAIN', 10);
-INSERT INTO image (id, image_path, image_section, house_id) VALUES (11, '9.jpg', 'GALLERY', 10);
+INSERT INTO image (id, image_path, image_section, house_id) VALUES (11, '11.jpg', 'GALLERY', 10);
+INSERT INTO image (id, image_path, image_section, house_id) VALUES (12, '12.jpeg', 'GALLERY', 10);
+INSERT INTO image (id, image_path, image_section, house_id) VALUES (13, '13.jpg', 'GALLERY', 1);
 ALTER SEQUENCE IMAGE_SEQ RESTART WITH 12;
 
 INSERT INTO authority (id, name) VALUES (1, 'ROLE_ADMIN');

@@ -23,19 +23,19 @@
                 </dl>
             </div>
             <div class="col-md-7">
-                <img class="card-img-top" th:src="@{/getImage/{imageId}(imageId=${house.mainImage.id})}" data-holder-rendered="true">
+                <img class="card-img-top" th:src="@{/getImage/{imagePath}(imagePath=${house.mainImage.imagePath})}" data-holder-rendered="true">
+
+                <div class="row flex-nowrap gallery">
+                    <a th:each="galleryImage : ${house.getImagesBySection(T(com.example.demo.model.ImageSection).GALLERY)}"
+                            th:href="@{/getImage/{imagePath}(imagePath=${galleryImage.imagePath})}"
+                            data-toggle="lightbox" data-gallery="gallery" class="col-md-3"
+                            data-max-width="640"
+                            data-type="image">
+                        <img th:src="@{/getImage/{imagePath}(imagePath=${galleryImage.imagePath})}" class="img-fluid rounded">
+                    </a>
+                </div>
             </div>
         </div>
-        <!-- TODO display in proper way
-        <div class="row">
-            <div class="col-md-12">
-                <ul>
-                    <li th:each="galleryImage : ${house.getImagesBySection(T(com.example.demo.model.ImageSection).GALLERY)}">
-                        <img class="card-img-top" th:src="@{/getImage/{imageId}(imageId=${galleryImage.id})}" data-holder-rendered="true">
-                    </li>
-                </ul>
-            </div>
-        </div>-->
     </div>
 </div>
 </body>
